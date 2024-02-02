@@ -2,31 +2,29 @@
 
 import { useState } from "react";
 import "./App.css";
-import Counter from "./Counter";
+import Counter from "./components/Counter";
 
 function App() {
-    const [countCardList, setCountCardList] = useState(0);
     const [cards, setCards] = useState([]);
 
-    function deleteCounter(index) {
+    const deleteCounter = (index) => {
         setCards((prevCounters) =>
-            prevCounters.filter((items, i) =>{
-              console.log(items.key);
-              return +items.key!==index
+            prevCounters.filter((items) => {
+                return +items.key !== index;
             })
         );
-    }
-    function addCounter() {
-        setCountCardList((prev) => prev + 1);
+    };
+
+    const addCounter = () => {
         setCards((prev) => [
             ...prev,
             <Counter
-            itemNo={prev.length+1}
+                itemNo={prev.length + 1}
                 onDelete={() => deleteCounter(prev.length)}
                 key={prev.length}
             />,
         ]);
-    }
+    };
 
     return (
         <>
@@ -37,7 +35,11 @@ function App() {
 
                 <div className="my-4 text-white">
                     <div className="row my-3">
-                        {cards.length>0 ?  cards.map((item) => item) : <p className=" text-white">Click on Add Counter</p>}
+                        {cards.length > 0 ? (
+                            cards.map((item) => item)
+                        ) : (
+                            <p className=" text-white">Click on Add Counter</p>
+                        )}
                     </div>
                 </div>
             </div>

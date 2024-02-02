@@ -2,7 +2,7 @@
 
 import React, { useEffect, useRef, useState } from "react";
 
-function Counter(props) {
+function Counter({onDelete}) {
     const [isRunning, setIsRunning] = useState(true);
     const [isUp, setIsUp] = useState(true);
     const [elapsedTime, setElapsedTime] = useState(0);
@@ -16,13 +16,13 @@ function Counter(props) {
         return () => clearInterval(timer);
     }, [isRunning, isUp]);
 
-    function updateCount() {
+    const updateCount = () => {
         setElapsedTime((prev) => (isUp ? prev + 1 : prev - 1));
-    }
+    };
 
-    function formatTime(time) {
-        return `${time}`;
-    }
+    const formatTime = (time) => {
+        return time;
+    };
     return (
         <>
             <div className="col-lg-3 col-md-6 col-12 my-2">
@@ -46,7 +46,7 @@ function Counter(props) {
                         <button
                             className="btn btn-secondary my-2"
                             style={{ width: "max-content" }}
-                            onClick={() => props.onDelete()}
+                            onClick={() => onDelete()}
                         >
                             delete
                         </button>
